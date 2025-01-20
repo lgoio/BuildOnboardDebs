@@ -40,34 +40,9 @@ if ! tar xzf "$ONBOARD_ARCHIVE"; then
     exit 1
 fi
 
-
-# Workaround: Ignore changes in po/onboard.pot
-echo 'extend-diff-ignore = "po/onboard.pot"' > "$BUILD_PATH/onboard-$ONBOARD_VERSION/debian/source/options"
-
-
 # Navigate to extracted source directory
 cd "$BUILD_PATH/onboard-$ONBOARD_VERSION"
 
-
-
-# Install GSettings schema
-if ! tools/install_gsettings_schema; then
-    echo "Failed to install GSettings schema"
-    exit 1
-fi
-
-# Build and install onboard
-echo "Building and installing onboard..."
-python3 setup.py clean
-python3 setup.py build
-python3 setup.py install
-
-# Install build dependencies
-echo "Installing build dependencies..."
-if ! apt-get build-dep -y .; then
-    echo "Failed to install build dependencies"
-    exit 1
-fi
 
 # Build Debian package
 echo "Building Debian package..."
