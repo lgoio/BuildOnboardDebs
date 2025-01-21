@@ -19,7 +19,7 @@ OUTPUT_DIR="$WORKING_DIR/debs/"
 BUILD_PATH=$(mktemp -d /tmp/onboard_deb_build_XXXXX)
 
 # Version
-ONBOARD_VERSION="1.4.2"
+ONBOARD_VERSION="1.4.2.1"
 ONBOARD_ARCHIVE="onboard_$ONBOARD_VERSION.orig.tar.gz"
 
 # Install necessary dependencies
@@ -51,6 +51,12 @@ fi
 
 # Navigate to extracted source directory
 cd "$BUILD_PATH/onboard-$ONBOARD_VERSION"
+
+ARCHIVE_ONBOARD_VERSION="$(python3 setup.py --version | grep -v "dconf version" | grep -v "^[^0-9\.vV]+$" | head -n 1)"
+if [ "$ONBOARD_VERSION" != "$ARCHIVE_ONBOARD_VERSION" ]; then
+	echo "Rename $ONBOARD_ARCHIVE to onboard_$ARCHIVE_ONBOARD_VERSION.orig.tar.gz "
+	mv "$BUILD_PATH/$ONBOARD_ARCHIVE" "$BUILD_PATH/onboard_$ARCHIVE_ONBOARD_VERSION.orig.tar.gz"
+fi
 
 # Install build dependencies
 echo "Installing build dependencies..."
