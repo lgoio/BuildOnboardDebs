@@ -1,38 +1,34 @@
-# Build and Install Onboard Debian Packages
+# Build Onboard Deb packages with Docker
+To create Deb packages on the host system, the `build_debs.sh` script is now available in the Onboard Git repository:  
+[https://github.com/dr-ni/onboard/](https://github.com/dr-ni/onboard/)
 
-This repository provides tools to build and install Onboard `.deb` packages for Ubuntu 24.04 LTS. 
-You can build the packages using **Docker** or directly on an **Ubuntu 24.04 system** and install them via a temporary local APT repository.
+This repository remains available for those who wish to cross-compile Onboard for various platforms using Docker and QEMU.
 
 ## Scripts Overview
-- **`build_debs.sh`**: Builds `.deb` packages directly on Ubuntu.
-- **`docker_build_debs.sh`**: Builds the packages inside a Docker container.
-- **`install_with_local_repo.sh`**: Sets up a temporary local APT repository to install the built packages.
+- **`build_debs.sh`**: Builds `.deb` packages on the Host.
+- **`docker_build_debs*.sh`**: Builds the packages inside a Docker container.
 
 ## Requirements
 - **Docker**: Required for the Docker-based method.
-- **Ubuntu 24.04**: Required for direct builds; dependencies are installed automatically by `build_debs.sh` and `install_with_local_repo.sh`.
+- **Qemu**: Required for cross compiling.
 
 ## Build Instructions
 
 ### **1. Using Docker**
 Run the following to build the packages in a container:
 ```bash
-bash docker_build_debs.sh
+bash docker_build_ubuntu_24_04.sh
 ```
 The `.deb` files will be saved in `$(pwd)/debs`.
 
-### **2. Using Ubuntu 24.04**
-Run the following to build the packages directly:
-```bash
-bash build_debs.sh
-```
-The `.deb` files will be saved in the `debs/` directory.
+### ** Building packages on the Host **
 
 ## Install Instructions
 
-After building the .deb packages, copy the debs directory and the install_with_local_repo.sh script to the target system.
+After building copy the debs directory to the target system.
 Then, run the following command:
 ```bash
+cd /path/to/debs/ubuntu/noble_numbat
 sudo bash install_with_local_repo.sh
 ```
 This script sets up a local APT repository, installs `onboard`, `onboard-data`, and `gnome-shell-extension-onboard`, and cleans up afterward.
