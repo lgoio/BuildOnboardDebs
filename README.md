@@ -2,7 +2,7 @@
 To create Deb packages on the host system, the `build_debs.sh` script is now available in the Onboard Git repository:  
 [https://github.com/dr-ni/onboard/](https://github.com/dr-ni/onboard/)
 
-This repository remains available for those who wish to cross-compile Onboard for various platforms using Docker and QEMU.
+This repository is for those who wish to cross-compile Onboard for various platforms using Docker and QEMU.
 
 ## Scripts Overview
 - **`build_debs.sh`**: Builds `.deb` packages on the Host.
