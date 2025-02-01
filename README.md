@@ -29,7 +29,7 @@ After building copy the debs directory to the target system.
 Then, run the following command:
 ```bash
 cd /path/to/debs/ubuntu/noble_numbat
-sudo bash install_with_local_repo.sh
+sudo bash apt_install_debs.sh
 ```
 This script sets up a local APT repository, installs `onboard`, `onboard-data`, and `gnome-shell-extension-onboard`, and cleans up afterward.
 

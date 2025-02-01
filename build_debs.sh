@@ -64,8 +64,15 @@ rm -Rf "$OUTPUT_DIR/"*
 
 mv ./build/debs/*.deb "$OUTPUT_DIR"
 mv ./build/debs/Packages.gz "$OUTPUT_DIR"
-chmod +x install_debs_with_local_repo.sh
-mv ./install_debs_with_local_repo.sh "$OUTPUT_DIR"
+
+if [ -f "apt_install_debs.sh" ]; then
+	mv ./apt_install_debs.sh "$OUTPUT_DIR/apt_install_debs.sh"
+else
+	mv ./install_debs_with_local_repo.sh "$OUTPUT_DIR/apt_install_debs.sh"
+fi
+
+chmod +x "$OUTPUT_DIR/apt_install_debs.sh"
+
 cd "$OUTPUT_DIR"
 
 chown -R $USER_ID:$GROUP_ID "$OUTPUT_DIR"
